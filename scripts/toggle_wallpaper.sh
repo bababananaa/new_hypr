@@ -1,0 +1,42 @@
+#!/bin/bash
+
+STATE_FILE="$HOME/.config/hypr/.wallpaper_state"
+
+WALLPAPER1="$HOME/wallpapers/light.jpg"
+WALLPAPER2="$HOME/wallpapers/dark.jpg"
+
+# Default state
+if [ ! -f "$STATE_FILE" ]; then
+    echo "snow" > "$STATE_FILE"
+fi
+
+STATE=$(cat "$STATE_FILE")
+
+if [ "$STATE" = "snow" ]; then
+    hyprctl hyprpaper reload "$WALLPAPER2"
+    echo "moon" > "$STATE_FILE"
+    
+    eww update wallpaper_mode="moon"
+    eww open wallpaper_popup
+    hyprctl hyprpaper wallpaper "eDP-1, $WALLPAPER2"
+    hyprctl hyprpaper wallpaper "HDMI-A-1,$WALLPAPER2"
+
+    hyprctl eval 'hl.plugin.hyprglass.config({ default_preset = "glass"})'
+
+    sleep 2
+    eww close wallpaper_popup
+
+else
+    hyprctl hyprpaper reload "$WALLPAPER1"
+    echo "snow" > "$STATE_FILE"
+
+    eww update wallpaper_mode="snow"
+    eww open wallpaper_popup
+    hyprctl hyprpaper wallpaper "eDP-1, $WALLPAPER1"
+    hyprctl hyprpaper wallpaper "HDMI-A-1,$WALLPAPER1"
+
+    hyprctl eval 'hl.plugin.hyprglass.config({ default_preset = "LightGlass"})'
+
+    sleep 2
+    eww close wallpaper_popup
+fi
