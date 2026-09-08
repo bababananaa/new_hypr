@@ -11,7 +11,7 @@
 local terminal      = "kitty"
 local fileManager   = "nautilus -w"
 local menu          = "wofi --show drun"
-local browser       = "zen-browser"
+local browser       = "firefox"
 local notifications = "swaync-client -t -sw"
 local llm           = "zen-browser --new-window \"http://localhost:9000/\" -P \"OpenWebUI\""
 local ide           = "brave-localhost__-default" -- Code server accessed on machine
@@ -43,8 +43,10 @@ hl.bind(mainMod .. " + J", hl.dsp.layout("togglesplit"))    -- dwindle only
 hl.bind(mainMod .. " + R", hl.dsp.exec_cmd(menu))
 hl.bind(mainMod .. " + B", hl.dsp.exec_cmd(browser)) -- Browser Shortcut
 hl.bind(mainMod .. " + F", hl.dsp.window.fullscreen()) -- Quick Fullscreen
-hl.bind(mainMod .. " + page_down", hl.dsp.exec_cmd("hyprshot -m output -o $HOME/Pictures/Screenshots")) -- Full Page Screenshot
-hl.bind(mainMod .. " + page_up", hl.dsp.exec_cmd("hyprshot -m region output -o $HOME/Pictures/Screenshots")) -- Region Screenshot
+hl.bind(mainMod .. " + page_down", hl.dsp.exec_cmd("$HOME/.local/bin/hyprshot -m output -o $HOME/Pictures/Screenshots")) -- Full Page Screenshot
+hl.bind(mainMod .. " + page_up", hl.dsp.exec_cmd("$HOME/.local/bin/hyprshot -m region output -o $HOME/Pictures/Screenshots")) -- Region Screenshot
+hl.bind("print", hl.dsp.exec_cmd("$HOME/.local/bin/hyprshot -m window -o $HOME/Pictures/Screenshots")) -- Window Screenshot
+hl.bind("SHIFT + print", hl.dsp.exec_cmd("$HOME/.local/bin/hyprshot -m region -o $HOME/Pictures/Screenshots")) -- Region Screenshot
 hl.bind(mainMod .. " + N", hl.dsp.exec_cmd(notifications)) -- Show/hide Notifications
 hl.bind(CSH .. " + insert", hl.dsp.exec_cmd("eww active-windows | grep powermenu  && eww close powermenu  || eww open powermenu")) -- Show/Hide powermenu
 hl.bind(CSH .. " + O", hl.dsp.exec_cmd(llm, { float = true})) -- Quick floating Ollama bind
@@ -112,7 +114,7 @@ hl.bind(mainMod .. " + down",  hl.dsp.focus({ direction = "down" }))
 
 -- Example special workspace (scratchpad)
 hl.bind(mainMod .. " + S",         hl.dsp.workspace.toggle_special("magic"))
-hl.bind(mainMod .. " + SHIFT + S", hl.dsp.window.move({ workspace = "special:magic" }))
+hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd("$HOME/.local/bin/hyprshot -m region --clipboard-only --freeze")) -- Region Screenshot to Clipboard
 
 -- COMMENTED OUT WORKSPACE NAVIGATION: GO CHECK THE grid.lua MODULE FOR ALL OF THIS!
 
