@@ -9,28 +9,8 @@
 --                                        ▀                           ▀████▀              
 -- [Still somewhat expirimental!]
 
--- Sets up all of the persistent workspaces (5x3 grid)
-
-hl.workspace_rule({ workspace = "1", persistent = true, monitor = "eDP-1"})
-hl.workspace_rule({ workspace = "2", persistent = true, monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "3", persistent = true, monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "4", persistent = true, monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "5", persistent = true, monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "6", persistent = false, monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "7", persistent = false, monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "8", persistent = false, monitor = "eDP-1", default = true })
-hl.workspace_rule({ workspace = "9", persistent = false, monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "10", persistent = false, monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "11", persistent = false, monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "12", persistent = false, monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "13", persistent = false, monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "14", persistent = false, monitor = "eDP-1" })
-hl.workspace_rule({ workspace = "15", persistent = false, monitor = "eDP-1" })
-
--- Sets workspace to center of the grid at launch
-hl.on("hyprland.start", function () 
-    hl.dispatch(hl.dsp.focus({ workspace = "8" }))
-end)
+-- Workspace rules for the 5x3 grid now live in workspaces.lua, including which one
+-- you land on at launch. This file is just the navigation on top of them.
 
 -- Variables for keybinds
 local mainMod = "SUPER"
